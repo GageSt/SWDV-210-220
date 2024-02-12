@@ -6,35 +6,43 @@ def display_welcome():
     print("")
 
 def get_scores():
-    score_total = 0
     counter = 0
+    score = []
     while True:
-        score = input("Enter test score: ")
-        if score == "x":
-            return  score_total, counter
+        user_input = input("Enter test score: ")
+        if user_input == "x":
+            return score
         else:
-            score = int(score)
-            if score >= 0 and score <= 100:
-                score_total += score
-                counter += 1 
-            else:
-                print("Test score must be from 0 through 100. " +
-                      "Score discarded. Try again.")
+            # Unknown problem and fix:
+            #validating number as alnum and verifying value range cannot be done in one if statement
+            #validating alnum first in a try catch fixes this problem
+            try:
+                user_input.isalnum() == True
+                if int(user_input) >= 0 and int(user_input) <= 100:
+                    score.insert(counter, int(user_input))
+                    counter += 1 
+                else:
+                    print("Test score must be from 0 through 100. " +
+                        "Score discarded. Try again.")
+            except: print("Test score must be a number!. " +
+                        "Score discarded. Try again.")
 
-def process_scores(score_total, count):
-    # calculate average score
-    average = score_total / count
-                
+def process_scores(score):
+       
     # format and display the result
     print()
-    print("Score total:       ", score_total)
-    print("Number of Scores:  ", count)
-    print("Average Score:     ", average)
+    print("Total:             ", sum(score))
+    print("Number of Scores:  ", len(score))
+    print("Average Score:     ", round(sum(score) / len(score), 2))
+    print("Low Score:         ", min(score))
+    print("High Score:        ", max(score))
+    # The mean is the sorted score's score list item at the length of score divided to an integer by 2
+    print("Median Score:      ", sorted(score)[len(score)//2])
 
 def main():
     display_welcome()
-    score_total, count = get_scores()
-    process_scores(score_total, count)
+    score = get_scores()
+    process_scores(score)
     print("")
     print("Bye!")
 
