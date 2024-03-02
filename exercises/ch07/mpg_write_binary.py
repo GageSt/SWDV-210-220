@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
 
-import csv
 
-FILENAME = "trips.csv"
+import pickle, json
+
+FILENAME = "tripsList.bin"
 
 
 def get_miles_driven():
-# --Successful attempt to add user input into a list thats returned, hindered by personal mishandling of a for x in loop
-#
-    """   
-    miles_driven = []
-    while (milesDriven := float(input("Enter miles driven:\t"))) <= 0:                    
-        print("Entry must be greater than zero. Please try again.\n")  
-    miles_driven.append(milesDriven)  
-    return miles_driven
-    """
+  
     while (miles_driven := float(input("Enter miles driven:\t"))) <= 0:                    
         print("Entry must be greater than zero. Please try again.\n")
     return miles_driven
@@ -23,6 +16,13 @@ def get_gallons_used():
     while (gallons_used := float(input("Enter gallons of gas:\t"))) <= 0:                    
         print("Entry must be greater than zero. Please try again.\n")
     return gallons_used
+
+def read_list():
+    with open(FILENAME, "rb") as file:
+        trips = pickle.load(file)
+#        print(trips)                           
+#        print(json.dumps(trips, indent=2))
+    return trips
         
 def main():
     # display a welcome message
@@ -31,21 +31,7 @@ def main():
     
     tripsList = []
     more = "y"
-    """ 
-    iteration = 0
     
-    while more.lower() == "y":
-        iteration += 1
-        miles_driven = get_miles_driven()
-        gallons_used = get_gallons_used()
-        mpg = []
-
-        for x in range(iteration):
-            print(f"{x}")
-            mpg.append(round(miles_driven[int(x)] // gallons_used[int(x)], 2))
-            print(f"Miles Per Gallon:\t{mpg[x]}")
-            print()
-    """
     while more.lower() == "y":
         miles_driven = get_miles_driven()
         gallons_used = get_gallons_used()
@@ -59,11 +45,16 @@ def main():
         
         more = input("More entries? (y or n): ")
     
-    with open(FILENAME, "w", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerows(tripsList)
+    with open(FILENAME, "wb") as file:
+      pickle.dump(tripsList, file)
 
     print("Bye!")
+    tripsList = read_list()
+
+    print(f"Distance\tGallons\t\tMPG")
+    for i, trips in enumerate(tripsList, start=1):
+        print(f"{i}. {trips[0]}\t{trips[1]}\t\t{trips[2]}")
+    
 
 if __name__ == "__main__":
     main()

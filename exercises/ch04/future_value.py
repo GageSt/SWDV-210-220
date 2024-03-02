@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 from validation import get_float, get_int
-def calculate_future_value(monthly_investment, yearly_interest, years):
+def calculate_future_value(monthly_investment, yearly_interest, years:int) -> float:
     # convert yearly values to monthly values
+    years
     monthly_interest_rate = yearly_interest / 12 / 100
     months = years * 12
 
@@ -17,7 +18,8 @@ def calculate_future_value(monthly_investment, yearly_interest, years):
 
 
 def main():
-    
+    import random
+    random.randint
     choice = "y"
     while choice.lower() == "y":
         
