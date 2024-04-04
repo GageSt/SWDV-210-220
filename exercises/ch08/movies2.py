@@ -1,7 +1,8 @@
+
 import csv
 import sys
 
-FILENAME = "movies.csv"
+FILENAME = (r'movies.csv')
 
 def exit_program():
     print("Terminating program.")
@@ -16,8 +17,9 @@ def read_movies():
                 movies.append(row)
         return movies
     except FileNotFoundError as e:
-        print(f"Could not find {FILENAME} file.")
-        exit_program()
+        return movies
+       # print(f"Could not find {FILENAME} file.")
+       # exit_program()
     except Exception as e:
         print(type(e), e)
         exit_program()
@@ -27,10 +29,12 @@ def write_movies(movies):
         with open(FILENAME, "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerows(movies)
+    except OSError as e:
+        print(type(e), e)
+        exit_program()
     except Exception as e:
         print(type(e), e)
         exit_program()
-
 def list_movies(movies):
     for i, movie in enumerate(movies, start=1):
         print(f"{i}. {movie[0]} ({movie[1]})")
@@ -38,12 +42,19 @@ def list_movies(movies):
     
 def add_movie(movies):
     name = input("Name: ")
-    year = input("Year: ")
-    movie = [name, year]
-    movies.append(movie)
-    write_movies(movies)
-    print(f"{name} was added.\n")
-
+    try:
+            year = float(input("Year: "))
+            if year > 0:
+                return year
+            else:
+                print(f"Entry must be greater than 0.")
+    
+            movie = [name, year]
+            movies.append(movie)
+            write_movies(movies)
+            print(f"{name} was added.\n")
+    except ValueError:
+         print(f"Input is not a valid number")
 def delete_movie(movies):
     while True:
         try:
