@@ -9,13 +9,15 @@ def main():
     # start timer
     input("Press Enter to start...")
     start_time = datetime.now()
-    print("Start time:", start_time)
+    #start_time = datetime.now("%H/%M:/%S")
+    #start_time_string = start_time.strftime(start_time[12:]) #[Error: datetime.datetime object not subscriptable]
+    print(f"Start time:, {start_time:%X.%f}") #formatted string needed to display start_time pg.309 X = time formatted for locale f = microsecond
     print()
     
     # stop timer
     input("Press Enter to stop...")    
-    stop_time = datetime.now()
-    print("Stop time: ", stop_time)
+    stop_time = datetime.now()   
+    print(f"Stop time: , {stop_time:%X.%f}")
     print()
 
     # calculate elapsed time
@@ -35,8 +37,8 @@ def main():
     # display results
     print("ELAPSED TIME")
     if days > 0:
-        print("Days:", days)
-    print("Time:", time_object)
+        print(f"Hours/minutes: {time_object:%H:%M}") #Where H is Hours and M is Minute
+    print(f"Seconds: {time_object:%S.%f}")           #Where S os Second and f is microseconds
 
 if __name__ == "__main__":
     main()
