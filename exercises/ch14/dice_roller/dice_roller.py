@@ -2,30 +2,10 @@ from dice import Dice, Die
 
 def main():
     print("The Dice Roller program")
-    print(" _____ \n" + \
-          "|     |\n" + \
-          "|  o  |\n" + \
-          "|_____|")
-    print(" _____ \n" + \
-          "|o    |\n" + \
-          "|     |\n" + \
-          "|____o|")    
-    print(" _____ \n" + \
-          "|o    |\n" + \
-          "|  o  |\n" + \
-          "|____o|")
-    print(" _____ \n" + \
-          "|o   o|\n" + \
-          "|     |\n" + \
-          "|o___o|")          
-    print(" _____ \n" + \
-          "|o   o|\n" + \
-          "|  o  |\n" + \
-          "|o___o|")
-    print(" _____ \n" + \
-          "|o   o|\n" + \
-          "|o   o|\n" + \
-          "|o___o|")
+    for i in range(1, 7):
+      die = Die()
+      die.value = i
+      print(die.image)
     print()
 
     # get number of dice from user
@@ -43,9 +23,11 @@ def main():
         dice.rollAll()
 
         #display to user
-        print("YOUR ROLL: ", end="")
+        print("YOUR ROLL: ") # , end="") Removed the end parameter
         for die in dice.list:
-            print(die.value, end=" ")
+            print(die.image)
+        print()
+        print("TOTAL:", dice.getTotal())
         print("\n")
 
         choice = input("Roll again? (y/n): ")

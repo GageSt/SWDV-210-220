@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
-
+'''
+Summary:
+1. Changed list to a dictionary with keywords
+2. List and add functions print() statements updated to access keyword values from the dictionary
+3. Changed the add function movie set value to accept inputs under dictionary keywords
+'''
 def list(movie_list):
     if len(movie_list) == 0:
         print("There are no movies in the list.\n")
         return
     else:
         for i, movie in enumerate(movie_list, start=1):
-            print(f"{i}. {movie[0]} ({movie[1]})")
+            print(f"{i}. {movie['movie']} ({movie['year']})")
         print()
 
 def add(movie_list):
     name = input("Name: ")
     year = input("Year: ")
-    movie = [name, year]
+    movie = {"movie": name, "year": year}    #changed from list format | [name, year]
     movie_list.append(movie)
-    print(f"{movie[0]} was added.\n")
+    print(f"{movie['movie']} was added.\n") # changed from list format | f"{movie[0]} 
     
 def delete(movie_list):
     number = int(input("Number: "))
@@ -22,7 +27,7 @@ def delete(movie_list):
         print("Invalid movie number.\n")
     else:
         movie = movie_list.pop(number-1)
-        print(f"{movie[0]} was deleted.\n")
+        print(f"{movie['movie']} was deleted.\n")
 
 def display_menu():
     print("COMMAND MENU")
@@ -33,9 +38,16 @@ def display_menu():
     print()    
         
 def main():
-    movie_list = [["Monty Python and the Holy Grail", 1975],
-                  ["On the Waterfront", 1954],
-                  ["Cat on a Hot Tin Roof", 1958]]
+    '''
+    basic_dictionary = [ 
+    {"keyword": "String Value", "keyword_2": numberValue_2 }
+    {"keyword": "String Value", "keyword_2": numberValue_2 }
+    ]
+    '''
+    movie_list = [{'movie': "Monty Python and the Holy Grail", 'year': 1975},
+                  {'movie': "On the Waterfront", 'year': 1954},
+                  {'movie': "Cat on a Hot Tin Roof", 'year': 1958}]
+    #   movie_list = dict(movie_list) | Name and year needed to be manually added
     
     display_menu()
     

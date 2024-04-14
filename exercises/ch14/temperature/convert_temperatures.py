@@ -1,25 +1,25 @@
-import temperature as temp
+#import temperature as temp
+from temperature import Temp
 
 def display_menu():
     print("The Convert Temperatures program")
     print()
     print("MENU")
     print("1. Fahrenheit to Celsius")
-    print("2. Celsius to Fahrenhit")
+    print("2. Celsius to Fahrenheit")
     print()
 
 def convert_temp():
+    temp = Temp()
     option = int(input("Enter a menu option: "))
     if option == 1:
         f = int(input("Enter degrees Fahrenheit: "))
-        c = temp.to_celsius(f)
-        c = round(c, 2)
-        print("Degrees Celsius:", c)    
+        temp.setFahrenheit(f)
+        print("Degrees Celsius:", temp.getCelsius())    
     elif option == 2:
         c = int(input("Enter degrees Celsius: "))
-        f = temp.to_fahrenheit(c)
-        f = round(f, 2)
-        print("Degrees Fahrenheit:", f)
+        temp.setCelsius(c)
+        print("Degrees Fahrenheit:", temp.getFahrenheit())
     else:
         print("You must enter a valid menu number.")
 
