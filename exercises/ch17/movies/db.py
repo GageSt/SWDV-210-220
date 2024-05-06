@@ -9,7 +9,7 @@ conn = None
 def connect():
     global conn
     if not conn:
-        DB_FILE = "/murach/python/_db/movies.sqlite"
+        DB_FILE = "../_db/movies.sqlite"
     conn = sqlite3.connect(DB_FILE)
     conn.row_factory = sqlite3.Row
 
